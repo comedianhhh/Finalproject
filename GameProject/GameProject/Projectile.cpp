@@ -11,14 +11,35 @@ void Projectile::Initialize()
 	start_pos = ownerEntity->GetTransform().position;
 	collider = (BoxCollider*)ownerEntity->GetComponent("BoxCollider");
 	sprite= (Sprite*)ownerEntity->GetComponent("Sprite");
-
-	collider->SetSize(10, 10);
 	
 }
 
 void Projectile::Update()
 {
-	ownerEntity->GetTransform().position+=dir*(speed*Time::Instance().DeltaTime());
+	
+	Vec2 movementStep = dir * (speed * Time::Instance().DeltaTime());
+
+	
+	ownerEntity->GetTransform().position += movementStep;
+
+	
+	distanceTraveled += movementStep.Magnitude();
+	for (const auto& other : collider->OnCollisionEnter())
+	{
+		if (other->GetOwner()->GetName() != "enemy")
+		{
+			continue;
+
+		}
+		ownerEntity->GetParentScene()->RemoveEntity(ownerEntity->GetUid());
+	}
+
+	// Check if the projectile has exceeded its range
+	if (distanceTraveled > Range) {
+
+		ownerEntity->GetParentScene()->RemoveEntity(ownerEntity->GetUid());
+	
+	}
 }
 
 void Projectile::SetSpeed(float spd)
@@ -28,4 +49,8 @@ void Projectile::SetSpeed(float spd)
 void Projectile::SetDirection(Vec2 direction)
 {
 	dir = direction;
+}
+void Projectile::SetRange(float range)
+{
+	Range = range;
 }

@@ -101,16 +101,14 @@ void Player::Fire()
 {
     Entity* bullet=ownerEntity->GetParentScene()->CreateEntity();
     bullet->SetName("PlayerBullet");
-    std::vector<std::string> components = {"BoxCollider"};
-    bullet->AddComponents(components);
     TextureAsset* bulletTexture = (TextureAsset*)AssetManager::Get().GetAsset("ddcf9a11-4797-4a5b-940b-25ccf471bf62");
     Sprite* bulletSprite = (Sprite*)bullet->CreateComponent("Sprite");
     bulletSprite->SetTextureAsset(bulletTexture);
 
-    BoxCollider* bulletCollider = (BoxCollider*)bullet->GetComponent("BoxCollider");
-
+	std::vector<std::string> components = { "BoxCollider" };
+	bullet->AddComponents(components);
     bullet->GetTransform().position = ownerEntity->GetTransform().position;
-    bullet->GetTransform().Scale(Vec2(2.0,2.0));
+    bullet->GetTransform().Scale(Vec2(1.3,1.3));
 
 
 
@@ -125,7 +123,8 @@ void Player::Fire()
 
 	// Assuming bullet has a ProjectileComponent to set its velocity.
 	Projectile* projectile = (Projectile*)bullet->CreateComponent("Projectile");
-    projectile->SetSpeed(30.0f);
+    projectile->SetSpeed(100.0f);
+    projectile->SetRange(400.0f);
 	projectile->SetDirection(direction);
 
 

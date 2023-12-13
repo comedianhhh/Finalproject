@@ -11,7 +11,10 @@
         "GUID": "ddcf9a11-4797-4a5b-940b-25ccf471bf62"
       },
       {
-        "GUID": "Spawner01"
+        "GUID": "player"
+      },
+      {
+        "GUID": "Spawner"
       }
     ]
   },
@@ -32,35 +35,30 @@
           {
             "ClassName": "AnimatedSprite",
             "ClassData": {
-              "Texture": "cyc",
+              "Texture": "player",
               "SpriteSheet": {
                 "Rows": 1,
-                "Columns": 6,
-                "Frames": 6
+                "Columns": 8,
+                "Frames": 8
               }
             }
           },
           {
             "ClassName": "BoxCollider",
             "ClassData": {
-              "Width": 480,
-              "Height": 480,
-              "Position": [ 1000, 250 ],
-              "Rotation": 0.0,
-              "Scale": [ 0.8, 0.8 ]
-            }
-          },
-          {
-            "ClassName": "Player",
-            "ClassData": {
-              "Speed": 400.0,
-              "DeathScene": "45f479c9-f110-43c5-be35-9fbbc5d7d694"
             }
           },
           {
             "ClassName": "HealhComponent",
             "ClassData": {
               "MaxHealth": 100.0
+            }
+          },
+          {
+            "ClassName": "Player",
+            "ClassData": {
+              "Speed": 200.0,
+              "DeathScene": "45f479c9-f110-43c5-be35-9fbbc5d7d694"
             }
           }
 
@@ -70,7 +68,7 @@
       },
       {
         "Name": "Bat",
-        "GUID": "bat",
+        "GUID": "enemybat",
         "Transform": {
           "Position": [ 100.0, 200.0 ],
           "Rotation": 0.0,
@@ -93,7 +91,12 @@
             "ClassData": {
             }
           },
-
+          {
+            "ClassName": "HealhComponent",
+             "ClassData": {
+             "MaxHealth": 3.0
+            }
+          },
           {
             "ClassName": "Enemy",
             "ClassData": {
@@ -116,7 +119,7 @@
           {
             "ClassName": "AnimatedSprite",
             "ClassData": {
-              "Texture": "Spawner01",
+              "Texture": "Spawner",
               "SpriteSheet": {
                 "Rows": 1,
                 "Columns": 4,

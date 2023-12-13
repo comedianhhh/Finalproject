@@ -15,6 +15,9 @@ private:
 	float currenthealth = 5;
 	float maxhealth = 5;
 
+	SDL_Color hit_effect_color = { 255,0,0,100 };
+	SDL_Color health_color= { 255, 255, 255 ,255};
+
 public:
 	void SetHealth(float hp);
 	float GetHealth() const;
@@ -23,6 +26,7 @@ public:
 	void TakeDamage(float dmg);
 	void Heal(float hp);
 	void ResetHealth();
+	void TriggerHitEffect();
 };
 
 

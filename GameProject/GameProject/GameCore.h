@@ -16,5 +16,6 @@
 #include "AudioSystem.h"
 #include "AssetManager.h"
 #include "HealhComponent.h"
+#include "Transform.h"
 
 #endif // !_GAME_CORE_H_

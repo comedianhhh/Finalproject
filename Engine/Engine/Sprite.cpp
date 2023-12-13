@@ -56,6 +56,10 @@ void Sprite::SetTextureAsset(TextureAsset* texAsset) {
         sourceRect = { 0, 0, size.x, size.y };
     }
 }
+void Sprite::SetFilterColor(const SDL_Color color)
+{
+	filterColor = color;
+}
 
 void Sprite::Render()
 {

@@ -7,18 +7,14 @@
 
 IMPLEMENT_DYNAMIC_CLASS(SpawnerComponent)
 
-SpawnerComponent::SpawnerComponent()
-	: lastSpawnTime(0), spawnInterval(10.0f), spawnType(SpawnerType::One) {
-	std::cout<<"SpawnerComponent created"<<std::endl;
-	SetSpawnFunction(spawnType);
-
-}
 void SpawnerComponent::Initialize()
 {
-	// Initialize lastSpawnTime to the current time to start counting from now.
+
 	Component::Initialize();
 	lastSpawnTime = Time::Instance().TotalTime();
-
+	lastSpawnTime = 0;
+	spawnInterval = 10.0f;
+	SetSpawnFunction(spawnType);
 	
 }
 void SpawnerComponent::Update()
@@ -68,30 +64,32 @@ void SpawnerComponent::SetSpawnFunction(SpawnerType type) {
 		spawnFunction = [this]() {
 			// Enemy spawn logic goes here
 			Entity* enemy = ownerEntity->GetParentScene()->CreateEntity();
-			std::cout<< "Enemy spawned" << std::endl;
-			// List the components that the enemy entity requires.
-			std::vector<std::string> components = { "BoxCollider"};
+			enemy->SetName("enemy");
+			// Set the enemy's initial position. You can customize this position.
+			enemy->GetTransform().position = ownerEntity->GetTransform().position;
+			enemy->GetTransform().scale = Vec2(1.0f, 1.0f);
+	
 
-			// Add the necessary components to the enemy entity.
-			enemy->AddComponents(components);
-			Enemy* enemyComponent = (Enemy*)enemy->CreateComponent("Enemy");
-
-			enemyComponent->setAttributes(100);
-			
-			// Load the texture asset for the enemy.
 			TextureAsset* enemyTexture = (TextureAsset*)AssetManager::Get().GetAsset("bat");
 			// Obtain the sprite component and set the enemy texture.
 			AnimatedSprite* enemySprite = (AnimatedSprite*)enemy->CreateComponent("AnimatedSprite");
-			BoxCollider* enemyCollider = (BoxCollider*)enemy->CreateComponent("BoxCollider");
 
 			enemySprite->SetTextureAsset(enemyTexture);
 			enemySprite->SetSpriteSheet(1, 6, 6);
 			
+			std::vector<std::string> components = { "BoxCollider" };
+			enemy->AddComponents(components);
 
+			HealhComponent* healthcomponent = (HealhComponent*)enemy->CreateComponent("HealhComponent");
+			healthcomponent->SetHealth(3.0);
 
-			// Set the enemy's initial position. You can customize this position.
-			enemy->GetTransform().position = ownerEntity->GetTransform().position;
-			enemy->GetTransform().scale=Vec2(0.8f,0.8f);
+			
+			// Load the texture asset for the enemy.
+
+			Enemy* enemyComponent = (Enemy*)enemy->CreateComponent("Enemy");
+
+			enemyComponent->setAttributes(100);
+
 			};
 		break;
 	case SpawnerType::Two:

@@ -28,6 +28,10 @@ void ICollider::Initialize()
 		// TODO: unsafe if our AnimatedSprite Component is destroyed.
 		m_rect = &((AnimatedSprite*)(ownerEntity->GetComponent("AnimatedSprite")))->targetRect;
 	}
+	else
+	{
+		LOG(ownerEntity->GetName()+"cannot set up the collider");
+	}
 }
 
 /**

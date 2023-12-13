@@ -10,7 +10,7 @@ class Enemy : public Component
 	DECLARE_DYNAMIC_DERIVED_CLASS(Enemy, Component)
 
 public:
-	Enemy();
+
 	void Initialize() override;
 	void Update() override;
 	void Load(json::JSON&) override;

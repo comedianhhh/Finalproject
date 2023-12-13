@@ -19,7 +19,7 @@ private:
 	SpawnerType spawnType;
 
 public:
-	SpawnerComponent();
+
 
 	void Initialize() override;
 	void Update() override;

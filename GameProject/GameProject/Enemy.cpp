@@ -6,9 +6,7 @@
 
 IMPLEMENT_DYNAMIC_CLASS(Enemy)
 
-Enemy::Enemy()
-{
-}
+
 void Enemy::Initialize()
 {
 	Component::Initialize();
@@ -33,8 +31,9 @@ void Enemy::Update()
 		if (other->GetOwner()->GetName() != "PlayerBullet")
 		{
 			continue;
-			std::cout<<"hit"<<std::endl;
+			
 		}
+		std::cout << "hit" << std::endl;
 		healthcomponent->TakeDamage(1.0);
 	}
 }

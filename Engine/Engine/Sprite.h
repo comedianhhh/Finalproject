@@ -83,6 +83,17 @@ public:
 	 */
 	void Load(json::JSON& node) override;
 	
+
+
+	/**
+	* @brief Sets the color mod of the sprite's texture.
+	*
+	* @param r The red component of the color.
+	* @param g The green component of the color.
+	* @param b The blue component of the color.
+	*/
+	void SetFilterColor(const SDL_Color color);
+
 };
 
 #endif
