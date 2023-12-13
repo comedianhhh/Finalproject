@@ -3,6 +3,7 @@
 #include "Time.h"
 #include "TextureAsset.h"
 #include "AnimatedSprite.h"
+#include "Enemy.h"
 
 IMPLEMENT_DYNAMIC_CLASS(SpawnerComponent)
 
@@ -69,24 +70,28 @@ void SpawnerComponent::SetSpawnFunction(SpawnerType type) {
 			Entity* enemy = ownerEntity->GetParentScene()->CreateEntity();
 			std::cout<< "Enemy spawned" << std::endl;
 			// List the components that the enemy entity requires.
-			std::vector<std::string> components = { "AnimatedSprite", "BoxCollider", "Enemy","HealhComponent"};
+			std::vector<std::string> components = { "BoxCollider"};
 
 			// Add the necessary components to the enemy entity.
 			enemy->AddComponents(components);
+			Enemy* enemyComponent = (Enemy*)enemy->CreateComponent("Enemy");
 
+			enemyComponent->setAttributes(100);
+			
 			// Load the texture asset for the enemy.
 			TextureAsset* enemyTexture = (TextureAsset*)AssetManager::Get().GetAsset("bat");
-
 			// Obtain the sprite component and set the enemy texture.
-			AnimatedSprite* enemySprite = (AnimatedSprite*)enemy->GetComponent("AnimatedSprite");
+			AnimatedSprite* enemySprite = (AnimatedSprite*)enemy->CreateComponent("AnimatedSprite");
+			BoxCollider* enemyCollider = (BoxCollider*)enemy->CreateComponent("BoxCollider");
 
-			if (enemySprite) {
-				enemySprite->SetTextureAsset(enemyTexture);
-				enemySprite->SetSpriteSheet(1, 6, 6);
-			}
+			enemySprite->SetTextureAsset(enemyTexture);
+			enemySprite->SetSpriteSheet(1, 6, 6);
+			
+
 
 			// Set the enemy's initial position. You can customize this position.
 			enemy->GetTransform().position = ownerEntity->GetTransform().position;
+			enemy->GetTransform().scale=Vec2(0.8f,0.8f);
 			};
 		break;
 	case SpawnerType::Two:

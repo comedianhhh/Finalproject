@@ -15,5 +15,6 @@
 #include "GameOver.h"
 #include "AudioSystem.h"
 #include "AssetManager.h"
+#include "HealhComponent.h"
 
 #endif // !_GAME_CORE_H_

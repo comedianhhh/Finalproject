@@ -12,7 +12,7 @@ void Entity::Initialize()
 {
 	transform.Initialize();
 
-	for (const auto component : components)
+	for (const auto component : componentsToAdd)
 	{
 		component->Initialize();
 	}
@@ -121,7 +121,7 @@ Component* Entity::CreateComponent(const std::string& componentName)
 {
     const auto component = (Component*)CreateObject(componentName.c_str());
 	component->ownerEntity = this;
-	components.push_back(component);
+	componentsToAdd.push_back(component);
 	return component;
 }
 

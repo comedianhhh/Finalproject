@@ -6,37 +6,37 @@
 
 IMPLEMENT_DYNAMIC_CLASS(Enemy)
 
+Enemy::Enemy()
+{
+}
 void Enemy::Initialize()
 {
 	Component::Initialize();
 	start_pos = ownerEntity->GetTransform().position;
 	collider = (BoxCollider*)ownerEntity->GetComponent("BoxCollider");
+	healthcomponent = (HealhComponent*)ownerEntity->GetComponent("HealhComponent");
 }
 
 //Enemy should move towards the player
-void Enemy::Update() {
-	const InputSystem& input = InputSystem::Instance();
-
-	// Get the position of the player and the enemy
-	Vec2 playerPos = GetPlayerPosition(); // Implement a function to get player position
-	Vec2 enemyPos = GetPosition(); // Implement a function to get enemy position
-
-	// Calculate the direction from the enemy to the player
-	Vec2 dir = playerPos - enemyPos;
-
-	// Normalize the direction vector if it's not zero
-	if (dir != Vec2::Zero) {
-		dir.Normalize();
+void Enemy::Update() 
+{
+#pragma region Move
+	Chase();
+#pragma endregion
+	if (collider == nullptr) 
+	{
+		return;
 	}
-
-	// Now, you have the direction to the player. You can use this direction
-	// to move the enemy towards the player at a certain speed.
 	
-
-	// Move the enemy in the calculated direction
-	ownerEntity->GetTransform().position += dir * (speed * Time::Instance().DeltaTime());
-
-	// Rest of your code here for handling input or other behaviors
+	for (const auto& other : collider->OnCollisionEnter())
+	{
+		if (other->GetOwner()->GetName() != "PlayerBullet")
+		{
+			continue;
+			std::cout<<"hit"<<std::endl;
+		}
+		healthcomponent->TakeDamage(1.0);
+	}
 }
 
 Vec2 Enemy::GetPosition()
@@ -92,13 +92,27 @@ void Enemy::Load(json::JSON& node)
 	{
 		speed = static_cast<float>(node.at("Speed").ToFloat());
 	}
+}
+void Enemy::setAttributes(float spd)
+{
+	speed = spd;
+}void Enemy::Chase() 
+{
+	// Get the position of the player and the enemy
+	Vec2 playerPos = GetPlayerPosition(); // Implement a function to get player position
+	Vec2 enemyPos = GetPosition(); // Implement a function to get enemy position
 
-	if (node.hasKey("Health"))
-	{
-		health = static_cast<int>(node.at("Health").ToInt());
+	// Calculate the direction from the enemy to the player
+	Vec2 dir = playerPos - enemyPos;
+
+	// Normalize the direction vector if it's not zero
+	if (dir != Vec2::Zero) {
+		dir.Normalize();
 	}
-	if (node.hasKey("Attack"))
-	{
-		attack = static_cast<int>(node.at("Attack").ToInt());
-	}
+
+
+	// Move the enemy in the calculated direction
+	ownerEntity->GetTransform().position += dir * (speed * Time::Instance().DeltaTime());
+
+	// Rest of your code here for handling input or other behaviors
 }

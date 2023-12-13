@@ -74,7 +74,7 @@
         "Transform": {
           "Position": [ 100.0, 200.0 ],
           "Rotation": 0.0,
-          "Scale": [ 2.0, 2.0 ]
+          "Scale": [ 1.0, 1.0 ]
         },
         "Components": [
           {
@@ -91,20 +91,13 @@
           {
             "ClassName": "BoxCollider",
             "ClassData": {
-              "Width": 480,
-              "Height": 480,
-              "Position": [ 1000, 250 ],
-              "Rotation": 0.0,
-              "Scale": [ 0.8, 0.8 ]
             }
           },
 
           {
             "ClassName": "Enemy",
             "ClassData": {
-              "Speed": 200.0,
-              "Attack": 5.0,
-              "Health": 10.0
+              "Speed": 200.0
 
             }
           }
@@ -134,11 +127,6 @@
           {
             "ClassName": "BoxCollider",
             "ClassData": {
-              "Width": 480,
-              "Height": 480,
-              "Position": [ 1000, 250 ],
-              "Rotation": 0.0,
-              "Scale": [ 0.8, 0.8 ]
             }
           },
 
