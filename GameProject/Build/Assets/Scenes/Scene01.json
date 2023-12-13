@@ -6,6 +6,12 @@
       },
       {
         "GUID": "bat"
+      },
+      {
+        "GUID": "ddcf9a11-4797-4a5b-940b-25ccf471bf62"
+      },
+      {
+        "GUID": "Spawner01"
       }
     ]
   },
@@ -50,11 +56,20 @@
               "Speed": 400.0,
               "DeathScene": "45f479c9-f110-43c5-be35-9fbbc5d7d694"
             }
+          },
+          {
+            "ClassName": "HealhComponent",
+            "ClassData": {
+              "MaxHealth": 100.0
+            }
           }
+
+
+
         ]
       },
       {
-"Name": "Bat",
+        "Name": "Bat",
         "GUID": "bat",
         "Transform": {
           "Position": [ 100.0, 200.0 ],
@@ -83,15 +98,60 @@
               "Scale": [ 0.8, 0.8 ]
             }
           },
+
           {
             "ClassName": "Enemy",
             "ClassData": {
               "Speed": 200.0,
               "Attack": 5.0,
               "Health": 10.0
-              
+
             }
           }
+
+        ]
+      },
+      {
+        "Name": "EnemySpawner",
+        "GUID": "Spawner01",
+        "Transform": {
+          "Position": [ 100.0, 200.0 ],
+          "Rotation": 0.0,
+          "Scale": [ 2.0, 2.0 ]
+        },
+        "Components": [
+          {
+            "ClassName": "AnimatedSprite",
+            "ClassData": {
+              "Texture": "Spawner01",
+              "SpriteSheet": {
+                "Rows": 1,
+                "Columns": 4,
+                "Frames": 4
+              }
+            }
+          },
+          {
+            "ClassName": "BoxCollider",
+            "ClassData": {
+              "Width": 480,
+              "Height": 480,
+              "Position": [ 1000, 250 ],
+              "Rotation": 0.0,
+              "Scale": [ 0.8, 0.8 ]
+            }
+          },
+
+          {
+            "ClassName": "SpawnerComponent",
+            "ClassData": {
+              "spawnInterval": 5.0,
+              "spawnCount": 4,
+              "spawnType": "One"
+
+            }
+          }
+
         ]
       }
      

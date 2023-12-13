@@ -1,0 +1,53 @@
+{
+  "AssetManager": {
+    "Assets": [
+      {
+        "GUID": "cyc"
+      },
+      {
+        "GUID": "bat"
+      }
+    ]
+  },
+  "Scene": {
+    "Name": "Level00",
+    "GUID": "39f8ebba-aa4a-4125-ae2d-6a544f7fb95f",
+    "IsEnabled": false,
+    "Entities": [
+      {
+        "Name": "GameOver",
+        "GUID": "uwu",
+        "Transform": {
+          "Position": [
+            320.0,
+            320.0
+          ],
+          "Rotation": 0.0,
+          "Scale": [
+            0.2,
+            0.2
+          ]
+        },
+        "Components": [
+          {
+            "ClassName": "GameOver",
+            "ClassData": {
+              "SoundTimer": 5.0,
+              "Sound": "meow",
+              "SceneToLoad": "1a9e5171-c7ab-47d4-9af4-d490d1494201",
+              "SceneLoadDelay": 15.0
+            }
+          },
+          {
+            "ClassName": "FontSprite",
+            "ClassData": {
+              "Text": "Game Over",
+              "Font": "https-youtu-be-jVhlJNJopOQ"
+            }
+          }
+        ]
+      }
+
+    ]
+  }
+}

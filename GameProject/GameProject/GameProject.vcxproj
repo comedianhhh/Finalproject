@@ -186,32 +186,44 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Game_Register.cpp" />
+    <ClCompile Include="HealhComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="SpawnerComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameCore.h" />
     <ClInclude Include="GameOver.h" />
+    <ClInclude Include="HealhComponent.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="SpawnerComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Build\Assets\Bat.png" />
     <Image Include="..\Build\Assets\Cyc.png" />
+    <Image Include="..\Build\Assets\Dungeon.png" />
     <Image Include="..\Build\Assets\girl.png" />
     <Image Include="..\Build\Assets\nottaco.png" />
+    <Image Include="..\Build\Assets\Projectile.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Build\Assets\AssetManager.json" />
     <None Include="..\Build\Assets\AudioSystem.json" />
     <None Include="..\Build\Assets\Bat.png.asset" />
     <None Include="..\Build\Assets\Cyc.png.asset" />
+    <None Include="..\Build\Assets\Dungeon.png.asset" />
     <None Include="..\Build\Assets\girl.png.asset" />
     <None Include="..\Build\Assets\hitEffect03.wav.asset" />
+    <None Include="..\Build\Assets\Level1.json" />
     <None Include="..\Build\Assets\nottaco.png.asset" />
     <None Include="..\Build\Assets\PAPYRUS.TTF.asset" />
+    <None Include="..\Build\Assets\Projectile.png.asset" />
     <None Include="..\Build\Assets\RenderSettings.json" />
     <None Include="..\Build\Assets\SceneManager.json" />
+    <None Include="..\Build\Assets\Scenes\Scene00.json" />
     <None Include="..\Build\Assets\Scenes\Scene01.json" />
     <None Include="..\Build\Assets\Scenes\Scene02.json" />
   </ItemGroup>

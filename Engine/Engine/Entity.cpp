@@ -121,7 +121,7 @@ Component* Entity::CreateComponent(const std::string& componentName)
 {
     const auto component = (Component*)CreateObject(componentName.c_str());
 	component->ownerEntity = this;
-	componentsToAdd.push_back(component);
+	components.push_back(component);
 	return component;
 }
 

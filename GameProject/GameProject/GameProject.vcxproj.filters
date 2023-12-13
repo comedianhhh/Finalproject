@@ -16,6 +16,15 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="HealhComponent.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnerComponent.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameCore.h">
@@ -28,6 +37,15 @@
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="HealhComponent.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnerComponent.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -68,6 +86,18 @@
     <None Include="..\Build\Assets\Bat.png.asset">
       <Filter>Assets\Textures</Filter>
     </None>
+    <None Include="..\Build\Assets\Dungeon.png.asset">
+      <Filter>Assets\Textures</Filter>
+    </None>
+    <None Include="..\Build\Assets\Level1.json">
+      <Filter>Scenes\Map</Filter>
+    </None>
+    <None Include="..\Build\Assets\Scenes\Scene00.json">
+      <Filter>Scenes</Filter>
+    </None>
+    <None Include="..\Build\Assets\Projectile.png.asset">
+      <Filter>Assets\Textures</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
@@ -106,6 +136,9 @@
     <Filter Include="Assets\Fonts">
       <UniqueIdentifier>{95613a3e-a2ef-4150-8e1d-634ee5a5fe9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\Map">
+      <UniqueIdentifier>{27c5e480-e48f-454c-9ad9-87e807346b15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\Build\Assets\hitEffect03.wav">
@@ -123,6 +156,12 @@
       <Filter>Assets\Textures</Filter>
     </Image>
     <Image Include="..\Build\Assets\Bat.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Build\Assets\Dungeon.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Build\Assets\Projectile.png">
       <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>

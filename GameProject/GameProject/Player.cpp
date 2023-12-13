@@ -1,6 +1,10 @@
 #include "GameCore.h"
 #include "Player.h"
+#include "Sprite.h"
+#include "BoxCollider.h"
+#include "Projectile.h"
 
+#include "AssetManager.h"
 #define NDEBUG_PLAYER
 
 IMPLEMENT_DYNAMIC_CLASS(Player)
@@ -30,7 +34,14 @@ void Player::Update() {
     if (input.isKeyPressed(SDLK_DOWN) || input.isKeyPressed(SDLK_s) || input.isGamepadButtonPressed(0, SDL_CONTROLLER_BUTTON_DPAD_DOWN)) {
         dir.y += 1;
     }
+    //fire
 
+    if(input.isMouseButtonPressed(SDL_MOUSEBUTTONDOWN)&& Time::Instance().TotalTime()-last_fire>cooldown)
+	{
+		Fire();
+        last_fire = Time::Instance().TotalTime();
+        std::cout<<"fire"<< std::endl;
+	}
     // Handle gamepad analog stick input
     if (dir == Vec2::Zero) {
         dir.x = input.getGamepadAxisState(0, SDL_CONTROLLER_AXIS_LEFTX);
@@ -50,7 +61,7 @@ void Player::Update() {
 
     if (collider == nullptr)
     {
-        LOG("no collider uwu");
+        //LOG("no collider uwu");
         return;
     }
     for (const auto& other: collider->OnCollisionEnter())
@@ -81,4 +92,33 @@ void Player::Load(json::JSON& node)
     {
 	    game_over_scene = GetHashCode(node.at("DeathScene").ToString().c_str());
     }
+}
+void Player::Fire()
+{
+    Entity* bullet=ownerEntity->GetParentScene()->CreateEntity();
+    std::vector<std::string> components = {"Sprite",  "BoxCollider", "Projectile"};
+    bullet->AddComponents(components);
+    TextureAsset* bulletTexture = (TextureAsset*)AssetManager::Get().GetAsset("ddcf9a11-4797-4a5b-940b-25ccf471bf62");
+    Sprite* bulletSprite = (Sprite*)bullet->GetComponent("Sprite");
+    bulletSprite->SetTextureAsset(bulletTexture);
+    bullet->GetTransform().position = ownerEntity->GetTransform().position;
+
+	Vec2 targetPos;
+	
+	// Get mouse position and adjust by camera position.
+	int mouseX, mouseY;
+	SDL_GetMouseState(&mouseX, &mouseY);
+
+	targetPos = Vec2(static_cast<float>(mouseX), static_cast<float>(mouseY));
+
+	// Calculate direction and set velocity.
+	Vec2 direction = targetPos - ownerEntity->GetTransform().position;
+    direction.Normalize();
+
+	// Assuming bullet has a ProjectileComponent to set its velocity.
+	Projectile* projectile = (Projectile*)bullet->GetComponent("Projectile");
+    projectile->SetSpeed(30.0f);
+	projectile->SetDirection(direction);
+
+
 }

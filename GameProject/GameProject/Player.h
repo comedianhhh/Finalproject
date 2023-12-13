@@ -19,6 +19,11 @@ private:
     Vec2 start_pos;
     BoxCollider* collider = nullptr;
     STRCODE game_over_scene = -1;
+
+private:
+    void Fire();
+    float cooldown = 0.5f;
+    float last_fire = 0.0f;
 };
 
 #endif // PLAYER_H
