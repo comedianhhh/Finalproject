@@ -2,25 +2,57 @@
   "AssetManager": {
     "Assets": [
       {
-        "GUID": "cyc"
+        "GUID": "specimen-VT323"
       },
       {
-        "GUID": "bat"
+        "GUID": "clickeffect"
       }
+
     ]
   },
   "Scene": {
     "Name": "Level00",
     "GUID": "39f8ebba-aa4a-4125-ae2d-6a544f7fb95f",
-    "IsEnabled": false,
+    "IsEnabled": true,
     "Entities": [
       {
-        "Name": "GameOver",
-        "GUID": "uwu",
+        "Name": "GameBegin",
+        "GUID": "GameTitle",
+        "Transform": {
+          "Position": [
+            600.0,
+            300.0
+          ],
+          "Rotation": 0.0,
+          "Scale": [
+            0.6,
+            0.6
+          ]
+        },
+        "Components": [
+          {
+            "ClassName": "FontSprite",
+            "ClassData": {
+              "Text": "Welcome Dark Dungeon",
+              "Font": "specimen-VT323",
+              "FontColor": {
+                "R": 7,
+                "G": 139,
+                "B": 188,
+                "A": 255
+              }
+            }
+          }
+
+        ]
+      },
+      {
+        "Name": "Play",
+        "GUID": "playbutton",
         "Transform": {
           "Position": [
             320.0,
-            320.0
+            300.0
           ],
           "Rotation": 0.0,
           "Scale": [
@@ -30,23 +62,19 @@
         },
         "Components": [
           {
-            "ClassName": "GameOver",
+            "ClassName": "MainMenu",
             "ClassData": {
               "SoundTimer": 5.0,
-              "Sound": "meow",
+              "Buttontype": "Play",
+              "Sound": "clickeffect",
               "SceneToLoad": "1a9e5171-c7ab-47d4-9af4-d490d1494201",
               "SceneLoadDelay": 15.0
             }
-          },
-          {
-            "ClassName": "FontSprite",
-            "ClassData": {
-              "Text": "Game Over",
-              "Font": "https-youtu-be-jVhlJNJopOQ"
-            }
           }
+
         ]
       }
+      
 
     ]
   }

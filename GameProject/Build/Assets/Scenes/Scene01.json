@@ -21,7 +21,7 @@
   "Scene": {
     "Name": "Level01",
     "GUID": "1a9e5171-c7ab-47d4-9af4-d490d1494201",
-    "IsEnabled": true,
+    "IsEnabled": false,
     "Entities": [
       {
         "Name": "Player",

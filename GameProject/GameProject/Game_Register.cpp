@@ -5,6 +5,7 @@
 #include "GameOver.h"
 #include "Projectile.h"
 #include "SpawnerComponent.h"
+#include "MainMenu.h"
 void GameRegisterClasses()
 {
 	REGISTER_TYPECLASS(Player)
@@ -12,4 +13,5 @@ void GameRegisterClasses()
 	REGISTER_TYPECLASS(GameOver)
 	REGISTER_TYPECLASS(Projectile)
 	REGISTER_TYPECLASS(SpawnerComponent)
+	REGISTER_TYPECLASS(MainMenu)
 }

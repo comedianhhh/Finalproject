@@ -86,6 +86,7 @@ public:
 	* Takes RGB values along with an Alpha and regenerates the font texture.
 	*/
 	void SetFontColor(int r, int g, int b, int a);
+	SDL_Rect GetRect() const{ return fontRect;}
 };
 
 #endif
