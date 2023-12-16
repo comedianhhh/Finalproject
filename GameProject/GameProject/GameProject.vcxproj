@@ -187,6 +187,8 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Game_Register.cpp" />
     <ClCompile Include="HealhComponent.cpp" />
+    <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="Loot.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -198,6 +200,8 @@
     <ClInclude Include="GameCore.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="HealhComponent.h" />
+    <ClInclude Include="HUD.h" />
+    <ClInclude Include="Loot.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />

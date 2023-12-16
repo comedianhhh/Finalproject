@@ -6,6 +6,8 @@
 #include "Projectile.h"
 #include "SpawnerComponent.h"
 #include "MainMenu.h"
+#include "HUD.h"
+#include "Loot.h"
 void GameRegisterClasses()
 {
 	REGISTER_TYPECLASS(Player)
@@ -14,4 +16,6 @@ void GameRegisterClasses()
 	REGISTER_TYPECLASS(Projectile)
 	REGISTER_TYPECLASS(SpawnerComponent)
 	REGISTER_TYPECLASS(MainMenu)
+	REGISTER_TYPECLASS(HUD)
+	REGISTER_TYPECLASS(Loot)
 }

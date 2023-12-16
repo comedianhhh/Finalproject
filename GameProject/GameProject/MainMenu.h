@@ -1,3 +1,10 @@
+// @file: MainMenu.h
+//
+// @brief: MainMenu class, used to display the main menu of the game
+//
+// @author: Alan
+// @date: 2023/12
+
 #pragma once
 #ifndef _MAINMENU_H
 #define _MAINMENU_H

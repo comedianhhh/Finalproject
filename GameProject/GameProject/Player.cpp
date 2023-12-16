@@ -1,3 +1,9 @@
+// @file: Player.cpp
+//
+// @brief: Player class, used to control the player's movement and fire
+//
+// @author: Alan
+// @date: 2023/12
 #include "GameCore.h"
 #include "Player.h"
 #include "Sprite.h"
@@ -14,8 +20,39 @@ void Player::Initialize()
     Component::Initialize();
     start_pos = ownerEntity->GetTransform().position;
     collider = (BoxCollider*)ownerEntity->GetComponent("BoxCollider");
+    health = (HealhComponent*)ownerEntity->GetComponent("HealhComponent");
+    lasthealth = health->GetHealth();
+    auto hudlist= ownerEntity->GetParentScene()->FindEntityWithComponent("HUD");
+    if (hudlist.size() > 0)
+	{
+		hud = (HUD*)hudlist.front()->GetComponent("HUD");
+	}
+	else
+	{
+		LOG("no hud found");
+	}
 }
-void Player::Update() {
+void Player::Update() 
+{
+    if(health->GetHealth()!=lasthealth)
+	{
+		lasthealth = health->GetHealth();
+        hud->SetPlayerHealth(lasthealth);
+        hud->ShowHealth(ownerEntity->GetTransform().position);
+	}
+
+    if (health->CheckDead())
+    {
+
+        std::cout << ownerEntity->GetName() << " is dead" << std::endl;
+  
+		Scene* current_scene = SceneManager::Get().GetActiveScene();
+		if (SceneManager::Get().SetActiveScene(game_over_scene))
+		{
+			current_scene->isEnabled = false;
+		}
+    }
+
 #pragma region Input
 
 
@@ -75,11 +112,7 @@ void Player::Update() {
             continue;
         }
 
-    	Scene* current_scene = SceneManager::Get().GetActiveScene();
-    	if (SceneManager::Get().SetActiveScene(game_over_scene))
-    	{
-    		current_scene->isEnabled = false;
-    	}
+
 
         ownerEntity->GetTransform().position = start_pos;
     }

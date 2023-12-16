@@ -1,8 +1,14 @@
+// @file: SpawnerComponent.h
+//
+// @brief: SpawnerComponent is a component that spawns enemies
+//
+// @author: Alan
+// @date: 2023/12
 #pragma once
 #ifndef _SPAWNERCOMPONENT_H_
 #define _SPAWNERCOMPONENT_H_
 #include "GameCore.h"
-
+#include "HealhComponent.h"
 class SpawnerComponent: public Component
 {
 	DECLARE_DYNAMIC_DERIVED_CLASS(SpawnerComponent, Component)
@@ -17,6 +23,8 @@ private:
 		Three
 	};
 	SpawnerType spawnType;
+	HealhComponent* health;
+	BoxCollider* collider;
 
 public:
 
@@ -27,6 +35,7 @@ public:
 	void SetSpawnInterval(float interval);
 	void SetSpawnFunction(SpawnerType);
 
+	void OnDeath();
 
 
 

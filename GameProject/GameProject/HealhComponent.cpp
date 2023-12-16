@@ -1,3 +1,9 @@
+// @file: HealhComponent.cpp
+//
+// @brief: Health component for the player and enemies
+//
+// @author: Alan
+// @date: 2023/12
 #include "GameCore.h"
 #include "HealhComponent.h"
 #include "Time.h"
@@ -11,14 +17,14 @@ void HealhComponent::Initialize()
 {
 	Component::Initialize();
 	currenthealth = maxhealth;
+	originalScale = ownerEntity->GetTransform().scale;
 }
 
 void HealhComponent::Update()
 {
 	if (currenthealth <= 0)
 	{
-		std::cout<<ownerEntity->GetName()<<" is dead"<<std::endl;
-		ownerEntity->GetParentScene()->RemoveEntity(ownerEntity->GetUid());
+		isDead = true;
 	}
 
 }
@@ -48,11 +54,16 @@ float HealhComponent::GetMaxHealth() const
 {
 	return maxhealth;
 }
+
+void HealhComponent::OnDeath()
+{
+
+}
 void HealhComponent::TakeDamage(float dmg)
 {
 	currenthealth -= dmg;
 	TriggerHitEffect();
-
+	LOG(ownerEntity->GetGuid()<<"  Hurt!")
 
 }
 void HealhComponent::Heal(float hp)
@@ -65,6 +76,7 @@ void HealhComponent::ResetHealth()
 }
 void HealhComponent::TriggerHitEffect()
 {
+
 	// Obtain the sprite component from the owner entity
 	AnimatedSprite* sprite = (AnimatedSprite*)ownerEntity->GetComponent("AnimatedSprite");
 	if (sprite)
@@ -85,17 +97,13 @@ void HealhComponent::TriggerHitEffect()
 	// If you have a transform component and want to apply a knockback effect
 	Transform& transform = ownerEntity->GetTransform();
 
-	// Save the original scale
-	Vec2 originalScale = transform.scale;
-
 	// Increase the scale to create a "pulse" effect
 	Vec2 largerScale = originalScale * 1.2f; // Scale up by 20%
 	transform.Scale(largerScale);
-
+	Vec2 temp = originalScale;
 	// Schedule a task to reset the scale after a short delay
-	Time::Instance().ScheduleTask(0.2f, [&transform, originalScale]() {
-		transform.scale = originalScale;
-		LOG("change scale")
+	Time::Instance().ScheduleTask(0.2f, [&transform, temp]() {
+		transform.scale = temp;
 		});
 
 	// Apply a knockback effect

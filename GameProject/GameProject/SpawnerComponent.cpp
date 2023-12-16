@@ -1,10 +1,16 @@
+// @file: SpawnerComponent
+//
+// @brief: A component that spawns enemies.
+//
+// @author: Alan
+// @date: 2023/12
 #include "GameCore.h"
 #include "SpawnerComponent.h"
 #include "Time.h"
 #include "TextureAsset.h"
 #include "AnimatedSprite.h"
 #include "Enemy.h"
-
+#include "Loot.h"
 IMPLEMENT_DYNAMIC_CLASS(SpawnerComponent)
 
 void SpawnerComponent::Initialize()
@@ -15,15 +21,35 @@ void SpawnerComponent::Initialize()
 	lastSpawnTime = 0;
 	spawnInterval = 10.0f;
 	SetSpawnFunction(spawnType);
-	
+	health= (HealhComponent*)ownerEntity->GetComponent("HealhComponent");
+	collider= (BoxCollider*)ownerEntity->GetComponent("BoxCollider");
 }
 void SpawnerComponent::Update()
 {
+	if(health == nullptr) {
+		return;
+	}
+
+	for (const auto& other : collider->OnCollisionEnter())
+	{
+		if (other->GetOwner()->GetName() != "PlayerBullet")
+		{
+			continue;
+
+		}
+		health->TakeDamage(1.0);
+	}
+	if (health->CheckDead())
+	{
+		OnDeath();
+		ownerEntity->GetParentScene()->RemoveEntity(ownerEntity->GetUid());
+	}
 	
 	if (Time::Instance().TotalTime() - lastSpawnTime > spawnInterval) {
 		spawnFunction();
 		lastSpawnTime = Time::Instance().TotalTime();
 	}
+
 }
 
 void SpawnerComponent::Load(json::JSON& node)
@@ -116,4 +142,18 @@ void SpawnerComponent::SetSpawnFunction(SpawnerType type) {
 			};
 		break;
 	}
+}
+
+void SpawnerComponent::OnDeath()
+{
+	Entity* loot = ownerEntity->GetParentScene()->CreateEntity();
+	loot->SetName("Loot");
+	loot->GetTransform().position = ownerEntity->GetTransform().position;
+	TextureAsset* lootTexture = (TextureAsset*)AssetManager::Get().GetAsset("lootmeat");
+	Sprite* sprite = (Sprite*)loot->CreateComponent("Sprite");
+	sprite->SetTextureAsset(lootTexture);
+	std::vector<std::string> components = { "BoxCollider" };
+	loot->AddComponents(components);
+	Loot* lootComponent = (Loot*)loot->CreateComponent("Loot");
+	lootComponent->SetLootType(Loot::LootType::HEALTH);
 }

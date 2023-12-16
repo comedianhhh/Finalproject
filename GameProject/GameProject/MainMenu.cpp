@@ -1,3 +1,9 @@
+// @file: MainMenu.cpp
+//
+// @brief: The main menu component that handles the main menu
+//
+// @author: Alan
+// @date: 2023/12
 #include "GameCore.h"
 #include "MainMenu.h"
 #include "FontSprite.h"

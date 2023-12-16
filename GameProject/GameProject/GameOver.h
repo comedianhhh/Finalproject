@@ -1,3 +1,9 @@
+// @file GameOver.h
+//
+// @brief GameOver class header file
+//
+// @author:Alan
+// @date: 2023/12
 #pragma once
 #ifndef GAME_OVER_H
 #define GAME_OVER_H

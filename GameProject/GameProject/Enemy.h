@@ -1,3 +1,9 @@
+// @file: Enemy.h
+//
+// @brief: Enemy class declaration
+//
+// @author: Alan
+// @date: 2023/12
 #pragma once
 
 #ifndef Enemy_H
@@ -18,6 +24,7 @@ public:
 private:
 	float speed = 5.0f;
 	int attack = 1;
+	HUD* hud;
 	Vec2 start_pos;
 	BoxCollider* collider = nullptr;
 	HealhComponent* healthcomponent = nullptr;
@@ -26,6 +33,7 @@ private:
 	Vec2 GetPlayerPosition();
 	Vec2 GetPosition();
 	void Chase();
+	void OnDeath();
 };
 
 #endif // Enemy_H

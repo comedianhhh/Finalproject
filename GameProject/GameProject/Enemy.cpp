@@ -1,6 +1,13 @@
+// @file: Enemy.cpp
+//
+// @brief: Enemy class, used to control enemy movement and health
+//
+// @author: Alan
+// @date: 2023/12
+
 #include "GameCore.h"
 #include "Enemy.h"
-#include "Player.h"
+#include"Sprite.h"
 
 #define NDEBUG_ENEMY
 
@@ -13,11 +20,29 @@ void Enemy::Initialize()
 	start_pos = ownerEntity->GetTransform().position;
 	collider = (BoxCollider*)ownerEntity->GetComponent("BoxCollider");
 	healthcomponent = (HealhComponent*)ownerEntity->GetComponent("HealhComponent");
+
+	auto hudlist = ownerEntity->GetParentScene()->FindEntityWithComponent("HUD");
+	if (hudlist.size() > 0)
+	{
+		hud = (HUD*)hudlist.front()->GetComponent("HUD");
+	}
+	else
+	{
+		LOG("no hud found");
+	}
 }
 
 //Enemy should move towards the player
 void Enemy::Update() 
 {
+	if(healthcomponent->CheckDead())
+	{
+		std::cout << ownerEntity->GetName() << " is dead" << std::endl;
+		OnDeath();
+		ownerEntity->GetParentScene()->RemoveEntity(ownerEntity->GetUid());
+	
+	}
+
 #pragma region Move
 	Chase();
 #pragma endregion
@@ -28,13 +53,17 @@ void Enemy::Update()
 	
 	for (const auto& other : collider->OnCollisionEnter())
 	{
-		if (other->GetOwner()->GetName() != "PlayerBullet")
+		if (other->GetOwner()->GetName() == "PlayerBullet")
 		{
-			continue;
-			
+			std::cout << "hit" << std::endl;
+			healthcomponent->TakeDamage(1.0);
 		}
-		std::cout << "hit" << std::endl;
-		healthcomponent->TakeDamage(1.0);
+		if (other->GetOwner()->GetName() == "Player")
+		{
+			std::cout << "attack player" << std::endl;
+			HealhComponent* hl = (HealhComponent*)other->GetOwner()->GetComponent("HealhComponent");
+			hl->TakeDamage(1.0);
+		}
 	}
 }
 
@@ -114,4 +143,9 @@ void Enemy::setAttributes(float spd)
 	ownerEntity->GetTransform().position += dir * (speed * Time::Instance().DeltaTime());
 
 	// Rest of your code here for handling input or other behaviors
+}
+void Enemy::OnDeath()
+{
+	hud->setKillCount(hud->getKillCount() + 1);
+	hud->ShowKillCount(ownerEntity->GetTransform().position);
 }

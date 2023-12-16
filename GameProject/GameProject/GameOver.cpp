@@ -1,3 +1,9 @@
+// @file: Gameover.cpp
+//
+// @brief: Gameover scene
+//
+// @author: Alan
+// @date: 2023/12
 #include "GameCore.h"
 #include "GameOver.h"
 

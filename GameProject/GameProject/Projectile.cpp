@@ -1,3 +1,9 @@
+// @file: Projectile.cpp
+//
+// @brief: Projectile class, used to create projectiles
+//
+// @author: Alan
+// @date: 2023/12
 #include "GameCore.h"
 #include "Projectile.h"
 

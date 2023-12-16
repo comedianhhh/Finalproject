@@ -1,3 +1,9 @@
+// @file: Projectile.h
+//
+// @brief: Projectile class, used for player and enemy projectiles
+//
+// @author: Alan
+// @date: 2023/12
 #pragma once
 #ifndef _PROJECTILE_H_
 #define _PROJECTILE_H_
